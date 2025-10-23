@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculatrice Moderne</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <div class="calculator">
+    <h1>🧮 Calculatrice</h1>
+    <input type="text" id="display" readonly />
+
+    <div id="buttons"></div>
+
+    <div class="controls">
+      <button id="historyBtn">🕒 Historique</button>
+      <a href="about.html" class="about-link">À propos</a>
+    </div>
+
+    <div id="history" class="hidden"></div>
+  </div>
+
+  <script src="button.js"></script>
+  <script src="logic.js"></script>
+  <script src="history.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+:root {
+  --btn-bg: #00b894;
+}
+
+body.dark {
+  background: #2d3436;
+  color: white;
+}
+
+body.dark .calculator {
+  background: #444;
+}
+
+body.dark .btn {
+  background: #0984e3;
+}
