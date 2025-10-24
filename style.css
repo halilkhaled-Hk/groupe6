@@ -1,2 +1,141 @@
+<<<<<<< Updated upstream
 /* Halil : modification du style des boutons */
 <!-- Halil : modif 3 sur tous les fichiers -->
+=======
+/* --- Style général de la page --- */
+body {
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0; /* Évite les marges par défaut du body */
+    transition: background 0.3s ease, color 0.3s ease; /* Effet doux pour le changement de thème */
+}
+
+/* --- Boîte principale de la calculatrice --- */
+.calculator {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    padding: 20px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: background 0.3s ease;
+}
+
+/* --- Écran d’affichage --- */
+.display {
+    background: #222;
+    color: #0f0;
+    font-size: 2em;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: right;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    word-wrap: break-word;
+    overflow-x: auto;
+}
+
+/* --- Grille de boutons --- */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+/* --- Boutons généraux --- */
+.btn {
+    background: #eee;
+    border: none;
+    padding: 15px;
+    font-size: 1.2em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn:hover {
+    background: #ddd;
+    transform: scale(1.03);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+/* --- Bouton “=” --- */
+.equal {
+    background: #0a84ff;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* --- Bouton “0” qui prend deux colonnes --- */
+.zero {
+    grid-column: span 2;
+}
+
+/* --- Zone d’historique --- */
+#history {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+    height: 60px;
+    overflow-y: auto;
+    background: #fafafa;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* --- Bouton de changement de thème --- */
+#theme-toggle {
+    margin-top: 10px;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    background: #ddd;
+    transition: background 0.2s ease;
+}
+
+#theme-toggle:hover {
+    background: #ccc;
+}
+
+/* --- Thème sombre --- */
+body.dark {
+    background: #1c1c1c;
+    color: #eee;
+}
+
+body.dark .calculator {
+    background: #2b2b2b;
+}
+
+body.dark .display {
+    background: #111;
+    color: #0f0;
+}
+
+body.dark .btn {
+    background: #444;
+    color: #eee;
+}
+
+body.dark .btn:hover {
+    background: #555;
+}
+
+body.dark #theme-toggle {
+    background: #444;
+    color: #fff;
+}
+>>>>>>> Stashed changes
