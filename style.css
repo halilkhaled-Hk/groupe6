@@ -1,7 +1,4 @@
-<<<<<<< Updated upstream
-/* Halil : modification du style des boutons */
-<!-- Halil : modif 3 sur tous les fichiers -->
-=======
+
 /* --- Style général de la page --- */
 body {
     background: #f0f0f0;
@@ -138,4 +135,4 @@ body.dark #theme-toggle {
     background: #444;
     color: #fff;
 }
->>>>>>> Stashed changes
+
