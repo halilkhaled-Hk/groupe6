@@ -1,1 +1,1 @@
-# groupe6
+# Projet GitHub Groupe 6
