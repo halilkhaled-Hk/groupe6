@@ -2,6 +2,7 @@ const historyDiv = document.getElementById("history");
 
 function addToHistory(entry) {
     const line = document.createElement("div");
-    line.textContent = entry;
+    const now = new Date().toLocaleString();//date et heure
+    line.textContent = '${now} - ${entry}';
     historyDiv.prepend(line);
 }
