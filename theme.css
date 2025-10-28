@@ -8,7 +8,7 @@ body.dark .calculator {
 
 body.dark .display {
     background: #000;
-    color: rgb(244, 46, 230);
+    color: rgb(242, 8, 195);
 }
 
 body.dark .btn {
@@ -17,7 +17,11 @@ body.dark .btn {
 }
 
 body.dark .btn:hover {
-    background: #444;
+    background: #e30ab4;
+}
+
+body.dark .equal {
+    background: #e30a0a;
 }
 
 body.dark #theme-toggle {

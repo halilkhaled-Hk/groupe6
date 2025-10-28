@@ -55,23 +55,14 @@ body {
 }
 
 .btn:hover {
-    background: #e0e0e0;
-    transform: scale(0.98);
+    background: #0ce056;
 }
 
-.btn.active {
-    background-color: rgba(0, 0, 0, 0.1);
-    transform: scale(0.95);
-    transition: transform 0.1s, background-color 0.1s;
-}
 
 .equal {
     background: #0a84ff;
     color: white;
-}
-
-.equal:hover {
-    background: #006fe6;
+    grid-column: span 2;
 }
 
 .zero {
