@@ -1,6 +1,7 @@
 const historyDiv = document.getElementById("history");
 
 function addToHistory(entry) {
+<<<<<<< HEAD
     if (!entry) return; // Empêche d'ajouter des lignes vides
 
     const line = document.createElement("div");
@@ -17,3 +18,9 @@ function addToHistory(entry) {
         historyDiv.removeChild(items[items.length - 1]);
     }
 }
+=======
+    const line = document.createElement("div");
+    line.textContent = entry;
+    historyDiv.prepend(line);
+}
+>>>>>>> origin/Abdoul

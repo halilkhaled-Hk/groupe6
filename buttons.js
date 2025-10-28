@@ -1,4 +1,5 @@
 const display = document.getElementById("display");
+<<<<<<< HEAD
 const buttons = document.querySelectorAll(".btn");
 
 buttons.forEach(btn => {
@@ -16,3 +17,12 @@ buttons.forEach(btn => {
         }
     });
 });
+=======
+
+document.querySelectorAll(".btn").forEach(button => {
+    button.addEventListener("click", () => {
+        const action = button.dataset.action;
+        handleButton(action);
+    });
+});
+>>>>>>> origin/Abdoul

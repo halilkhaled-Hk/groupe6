@@ -8,7 +8,11 @@ body.dark .calculator {
 
 body.dark .display {
     background: #000;
+<<<<<<< HEAD
     color: rgb(244, 46, 230);
+=======
+    color: #0f0;
+>>>>>>> origin/Abdoul
 }
 
 body.dark .btn {

@@ -1,15 +1,24 @@
 body {
+<<<<<<< HEAD
     background: linear-gradient(135deg, #dfe9f3, #ffffff);
     font-family: 'Segoe UI', Arial, sans-serif;
+=======
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+>>>>>>> origin/Abdoul
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+<<<<<<< HEAD
     margin: 0;
+=======
+>>>>>>> origin/Abdoul
 }
 
 .calculator {
     background: #fff;
+<<<<<<< HEAD
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     padding: 20px;
@@ -35,12 +44,29 @@ body {
     margin-bottom: 15px;
     width: 100%;
     box-sizing: border-box;
+=======
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    padding: 20px;
+    width: 280px;
+}
+
+.display {
+    background: #222;
+    color: #0f0;
+    font-size: 2em;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: right;
+    margin-bottom: 10px;
+>>>>>>> origin/Abdoul
 }
 
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+<<<<<<< HEAD
     width: 100%;
 }
 
@@ -63,6 +89,21 @@ body {
     background-color: rgba(0, 0, 0, 0.1);
     transform: scale(0.95);
     transition: transform 0.1s, background-color 0.1s;
+=======
+}
+
+.btn {
+    background: #eee;
+    border: none;
+    padding: 15px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #ddd;
+>>>>>>> origin/Abdoul
 }
 
 .equal {
@@ -70,15 +111,19 @@ body {
     color: white;
 }
 
+<<<<<<< HEAD
 .equal:hover {
     background: #006fe6;
 }
 
+=======
+>>>>>>> origin/Abdoul
 .zero {
     grid-column: span 2;
 }
 
 #history {
+<<<<<<< HEAD
     margin-top: 15px;
     font-size: 0.9em;
     color: #333;
@@ -121,3 +166,20 @@ body {
     background: #005ea6;
     transform: scale(0.98);
 }
+=======
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+    height: 60px;
+    overflow-y: auto;
+}
+
+#theme-toggle {
+    margin-top: 10px;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+>>>>>>> origin/Abdoul
