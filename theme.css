@@ -10,6 +10,7 @@ body.dark .display {
     background: #000;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     color: rgb(244, 46, 230);
 =======
     color: #0f0;
@@ -17,6 +18,9 @@ body.dark .display {
 =======
     color: rgb(242, 8, 195);
 >>>>>>> origin/Brayand
+=======
+    color: rgb(242, 8, 195);
+>>>>>>> origin/Halil
 }
 
 body.dark .btn {
@@ -33,6 +37,6 @@ body.dark .equal {
 }
 
 body.dark #theme-toggle {
-    background: #0a84ff;
+    background: #27415c;
     color: #fff;
 }

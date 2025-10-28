@@ -1,24 +1,36 @@
 body {
 <<<<<<< HEAD
+<<<<<<< HEAD
     background: linear-gradient(135deg, #dfe9f3, #ffffff);
     font-family: 'Segoe UI', Arial, sans-serif;
 =======
     background: #f0f0f0;
     font-family: Arial, sans-serif;
 >>>>>>> origin/Abdoul
+=======
+    background: linear-gradient(135deg, #dfe9f3, #ffffff);
+    font-family: 'Segoe UI', Arial, sans-serif;
+>>>>>>> origin/Halil
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 <<<<<<< HEAD
+<<<<<<< HEAD
     margin: 0;
 =======
 >>>>>>> origin/Abdoul
+=======
+    margin: 0;
+>>>>>>> origin/Halil
 }
 
 .calculator {
     background: #fff;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Halil
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     padding: 20px;
@@ -44,6 +56,7 @@ body {
     margin-bottom: 15px;
     width: 100%;
     box-sizing: border-box;
+<<<<<<< HEAD
 =======
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -60,6 +73,8 @@ body {
     text-align: right;
     margin-bottom: 10px;
 >>>>>>> origin/Abdoul
+=======
+>>>>>>> origin/Halil
 }
 
 .buttons {
@@ -67,6 +82,9 @@ body {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Halil
     width: 100%;
 }
 
@@ -81,6 +99,7 @@ body {
 }
 
 .btn:hover {
+<<<<<<< HEAD
     background: #e0e0e0;
     transform: scale(0.98);
 }
@@ -108,6 +127,9 @@ body {
 =======
     background: #0ce056;
 >>>>>>> origin/Brayand
+=======
+    background: #0ce056;
+>>>>>>> origin/Halil
 }
 
 
@@ -118,18 +140,24 @@ body {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .equal:hover {
     background: #006fe6;
 }
 
 =======
 >>>>>>> origin/Abdoul
+=======
+>>>>>>> origin/Halil
 .zero {
     grid-column: span 2;
 }
 
 #history {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Halil
     margin-top: 15px;
     font-size: 0.9em;
     color: #333;
@@ -172,6 +200,7 @@ body {
     background: #005ea6;
     transform: scale(0.98);
 }
+<<<<<<< HEAD
 =======
     margin-top: 10px;
     font-size: 0.9em;
@@ -189,3 +218,5 @@ body {
     width: 100%;
 }
 >>>>>>> origin/Abdoul
+=======
+>>>>>>> origin/Halil

@@ -1,5 +1,6 @@
 # groupe6
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # Calculatrice Moderne
 
@@ -21,3 +22,6 @@ Elle inclut un affichage dynamique, un historique des calculs, un bouton pour ch
 =======
 # 64 Brayand
 >>>>>>> origin/Brayand
+=======
+# 64 Brayand
+>>>>>>> origin/Halil
