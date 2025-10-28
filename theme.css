@@ -1,46 +1,26 @@
-/* --- Thème sombre --- */
 body.dark {
     background: #121212;
-    color: #e0e0e0;
-    transition: background 0.3s ease, color 0.3s ease;
 }
 
 body.dark .calculator {
     background: #1e1e1e;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 body.dark .display {
     background: #000;
-    color: #0f0;
-    border: 1px solid #0f0;
-    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+    color: rgb(244, 46, 230);
 }
 
 body.dark .btn {
-    background: #2a2a2a;
-    color: #f5f5f5;
-    border: 1px solid #333;
-    transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    background: #333;
+    color: #fff;
 }
 
 body.dark .btn:hover {
-    background: #3a3a3a;
-    transform: scale(1.03);
-}
-
-body.dark .btn:active {
-    transform: scale(0.97);
+    background: #444;
 }
 
 body.dark #theme-toggle {
     background: #0a84ff;
     color: #fff;
-    font-weight: bold;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-body.dark #theme-toggle:hover {
-    background: #0077e6;
 }

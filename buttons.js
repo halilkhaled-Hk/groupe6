@@ -4,14 +4,22 @@ const display = document.getElementById("display");
 if (display) {
     const buttons = document.querySelectorAll(".btn");
 
-    buttons.forEach((button) => {
-        button.addEventListener("click", (event) => {
-            const action = event.currentTarget.dataset.action;
-            
-            if (action) {
+    buttons.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            const action = e.currentTarget.dataset.action;
+            if (!action) {
+                console.warn("Aucune action définie pour ce bouton :", btn);
+                return;
+            }
+
+            // Animation visuelle sur le bouton
+            btn.classList.add("active");
+            setTimeout(() => btn.classList.remove("active"), 150);
+
+            try {
                 handleButton(action);
-            } else {
-                console.warn("Aucune action définie pour ce bouton :", button);
+            } catch (error) {
+                console.error("Erreur lors du traitement du bouton :", error);
             }
         });
     });
