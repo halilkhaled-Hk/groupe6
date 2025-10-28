@@ -9,10 +9,14 @@ body.dark .calculator {
 body.dark .display {
     background: #000;
 <<<<<<< HEAD
+<<<<<<< HEAD
     color: rgb(244, 46, 230);
 =======
     color: #0f0;
 >>>>>>> origin/Abdoul
+=======
+    color: rgb(242, 8, 195);
+>>>>>>> origin/Brayand
 }
 
 body.dark .btn {
@@ -21,7 +25,11 @@ body.dark .btn {
 }
 
 body.dark .btn:hover {
-    background: #444;
+    background: #e30ab4;
+}
+
+body.dark .equal {
+    background: #e30a0a;
 }
 
 body.dark #theme-toggle {

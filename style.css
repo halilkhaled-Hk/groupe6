@@ -102,13 +102,19 @@ body {
 }
 
 .btn:hover {
+<<<<<<< HEAD
     background: #ddd;
 >>>>>>> origin/Abdoul
+=======
+    background: #0ce056;
+>>>>>>> origin/Brayand
 }
+
 
 .equal {
     background: #0a84ff;
     color: white;
+    grid-column: span 2;
 }
 
 <<<<<<< HEAD
