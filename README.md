@@ -1,6 +1,4 @@
 # groupe6
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 # Calculatrice Moderne
 
@@ -18,10 +16,3 @@ Elle inclut un affichage dynamique, un historique des calculs, un bouton pour ch
 - ✅ Changement de thème clair/sombre (avec bouton)  
 - ✅ Bouton vers une page "À propos"  
 
-
-=======
-# 64 Brayand
->>>>>>> origin/Brayand
-=======
-# 64 Brayand
->>>>>>> origin/Halil
