@@ -1,0 +1,1 @@
+{ "name": "calculatrice-groupe6", "version": "1.0.0", "scripts": { "lint": "node ai-code-checker.js" }, "devDependencies": { "nodemailer": "^6.9.0" } } 
