@@ -26,12 +26,12 @@ if not EMAIL_SENDER or not EMAIL_PASSWORD:
     print("❌ Erreur : EMAIL_SENDER ou EMAIL_PASSWORD non défini.", file=sys.stderr)
     sys.exit(1)
 
-# === Configuration Gemini ===
+# === Configuration de Gemini ===
 genai.configure(api_key=GEMINI_API_KEY)
 MODEL_NAME: str = "models/gemini-2.5-flash"
 
 
-# === Fonction d'envoi d'email HTML avec option pièce jointe ===
+# === Fonction d’envoi d’email avec pièce jointe PDF ===
 def send_email(
     to_email: str,
     subject: str,
@@ -50,7 +50,7 @@ def send_email(
     else:
         msg.set_content(body)
 
-    # 🔗 Ajout de la pièce jointe si elle existe
+    # Ajout de la pièce jointe PDF si elle existe
     if attachment_path and os.path.exists(attachment_path):
         with open(attachment_path, "rb") as f:
             msg.add_attachment(
@@ -66,17 +66,17 @@ def send_email(
             server.send_message(msg)
         print(f"📧 Email envoyé à {to_email} {'avec pièce jointe' if attachment_path else 'sans pièce jointe'}.")
     except Exception as e:
-        print(f"⚠️ Échec de l'envoi de l'email : {str(e)}", file=sys.stderr)
+        print(f"⚠️ Échec de l’envoi de l’email : {e}", file=sys.stderr)
 
 
-# === Génération d’un rapport PDF ===
+# === Génération d’un rapport PDF clair ===
 def generate_pdf_report(errors: str, filename: str = "ai_report.pdf") -> str:
     """Crée un rapport PDF contenant les erreurs détectées."""
     doc = SimpleDocTemplate(filename, pagesize=A4)
     styles = getSampleStyleSheet()
     elements: List = []
 
-    elements.append(Paragraph("🚫 Rapport d'analyse syntaxique", styles["Title"]))
+    elements.append(Paragraph("🚫 Rapport d'analyse syntaxique IA Gemini", styles["Title"]))
     elements.append(Spacer(1, 12))
     elements.append(Paragraph("Voici les erreurs détectées :", styles["Normal"]))
     elements.append(Spacer(1, 12))
@@ -86,9 +86,9 @@ def generate_pdf_report(errors: str, filename: str = "ai_report.pdf") -> str:
     return filename
 
 
-# === Récupère les fichiers mis en staging ===
+# === Récupération des fichiers en staging ===
 def get_staged_files() -> List[str]:
-    """Retourne la liste des fichiers Python et JS en staging."""
+    """Retourne la liste des fichiers à analyser (.py, .js, .ts, .tsx)."""
     try:
         result = subprocess.run(
             ["git", "diff", "--cached", "--name-only"],
@@ -97,7 +97,9 @@ def get_staged_files() -> List[str]:
             check=True
         )
         files = result.stdout.strip().split("\n")
-        return [f for f in files if f.endswith(".js") or f.endswith(".py")]
+        # ✅ Extension supportée : Python, JS, TS, TSX
+        extensions = (".py", ".js", ".ts", ".tsx")
+        return [f for f in files if f.endswith(extensions)]
     except FileNotFoundError:
         print("❌ Git non trouvé sur le système. Vérifie ton installation Git.", file=sys.stderr)
         sys.exit(1)
@@ -106,9 +108,9 @@ def get_staged_files() -> List[str]:
         return []
 
 
-# === Récupère l'email de l'auteur du commit ===
+# === Récupération de l'email Git de l’auteur du commit ===
 def get_commit_author_email() -> Optional[str]:
-    """Retourne l'adresse email configurée dans Git."""
+    """Retourne l’adresse email configurée dans Git."""
     try:
         result = subprocess.run(
             ["git", "config", "user.email"],
@@ -121,9 +123,9 @@ def get_commit_author_email() -> Optional[str]:
         return None
 
 
-# === Analyse de la syntaxe via Gemini ===
+# === Analyse du code avec Gemini ===
 def review_code_with_gemini(file_path: str) -> str:
-    """Analyse un fichier pour détecter uniquement les erreurs de syntaxe."""
+    """Analyse un fichier et retourne les erreurs de syntaxe uniquement."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -135,16 +137,16 @@ def review_code_with_gemini(file_path: str) -> str:
             return f"⚠️ Impossible de lire {file_path} : {str(e)}"
 
     prompt: str = f"""
-Tu es un **analyseur de syntaxe** pour développeurs.
-Analyse ce code et détecte UNIQUEMENT les **erreurs de syntaxe** 
-(ex : parenthèses manquantes, indentation, accolades non fermées, mot-clé invalide...).
+Tu es un **analyseur de syntaxe strict**.
+Analyse le code ci-dessous et détecte uniquement les **erreurs de syntaxe** (parenthèses, accolades, indentation, imports invalides, etc.).
+Langages possibles : Python, JavaScript, TypeScript.
 
 Code :
 {content}
 
-Retourne exactement :
+Réponds strictement :
 - "Aucune erreur syntaxique détectée" si tout est correct.
-- Sinon, liste uniquement les erreurs syntaxiques détectées (sans explications supplémentaires).
+- Sinon, liste uniquement les erreurs syntaxiques détectées (une par ligne).
 """
 
     try:
@@ -152,15 +154,15 @@ Retourne exactement :
         response = model.generate_content(prompt)
         return response.text.strip()
     except Exception as e:
-        return f"⚠️ Erreur lors de l'analyse de {file_path} : {str(e)}"
+        return f"⚠️ Erreur lors de l’analyse de {file_path} : {str(e)}"
 
 
 # === Fonction principale ===
 def main() -> None:
-    """Point d’entrée principal du script."""
+    """Point d’entrée principal du script d’analyse."""
     files: List[str] = get_staged_files()
     if not files:
-        print("ℹ️ Aucun fichier Python ou JS détecté pour l'analyse.")
+        print("ℹ️ Aucun fichier à analyser (.py, .js, .ts, .tsx).")
         sys.exit(0)
 
     author_email: Optional[str] = get_commit_author_email()
@@ -171,7 +173,7 @@ def main() -> None:
         review: str = review_code_with_gemini(file)
         if "aucune erreur syntaxique détectée" not in review.lower():
             errors_detected = True
-            message += f"\nFichier : {file}\n{review}\n"
+            message += f"\n📄 Fichier : {file}\n{review}\n"
 
     if errors_detected:
         print("❌ Des erreurs de syntaxe ont été détectées :")
@@ -185,13 +187,12 @@ def main() -> None:
               <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
                 <h2 style="color: #D32F2F;">🚫 Des erreurs de syntaxe ont été détectées !</h2>
                 <p>Bonjour 👋,</p>
-                <p>Votre commit contient des fichiers avec des erreurs de syntaxe :</p>
+                <p>Votre commit contient des erreurs de syntaxe :</p>
                 <div style="background:#f9f9f9; padding:10px; border-radius:8px;">
                   <pre style="white-space: pre-wrap; font-family: monospace;">{message}</pre>
                 </div>
-                <p>Un rapport PDF est également joint à cet email.</p>
-                <p>Merci de corriger ces erreurs avant de recommitter. 💡</p>
-                <p style="margin-top:20px;">— Votre assistant de code automatisé 🤖</p>
+                <p>Un rapport PDF est joint à cet email.</p>
+                <p style="margin-top:20px;">— Votre assistant IA Gemini 🤖</p>
               </body>
             </html>
             """
@@ -203,7 +204,7 @@ def main() -> None:
                 attachment_path=pdf_path
             )
 
-        sys.exit(1)  # 🔒 Bloque le commit
+        sys.exit(1)  # Bloque le commit
 
     else:
         print("✅ Aucune erreur syntaxique détectée. Commit autorisé.")
@@ -213,8 +214,8 @@ def main() -> None:
               <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
                 <h2 style="color: #388E3C;">✅ Vérification syntaxique réussie !</h2>
                 <p>Bravo 🎉, aucun problème détecté dans votre commit.</p>
-                <p>Vous pouvez continuer vos développements en toute sérénité !</p>
-                <p style="margin-top:20px;">— Votre assistant de code automatisé 🤖</p>
+                <p>Continuez vos développements sereinement !</p>
+                <p style="margin-top:20px;">— Votre assistant IA Gemini 🤖</p>
               </body>
             </html>
             """
