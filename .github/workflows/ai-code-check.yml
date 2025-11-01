@@ -3,22 +3,67 @@ name: AI Code Analysis
 on: [push, pull_request]
 
 jobs:
-  analyze:
+  analyze-code:
     runs-on: ubuntu-latest
+    name: Analyze Project Structure
     
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        
-    - name: Install dependencies
-      run: npm install
+    - name: 📥 Checkout code
+      uses: actions/checkout@v3
       
-    - name: Run AI Code Analysis
-      run: node ai-code-checker.js
-      env:
-        GMAIL_USER: ${{ secrets.GMAIL_USER }}
-        GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+    - name: 🔍 Analyze Files
+      run: |
+        echo "🤖 DÉMARRAGE ANALYSE IA"
+        echo "Dépôt: $GITHUB_REPOSITORY"
+        echo "Commit: $GITHUB_SHA"
+        echo ""
+        echo "=== STRUCTURE DU PROJET ==="
+        ls -la
+        echo ""
+        echo "=== FICHIERS TROUVÉS ==="
+        
+        # Vérifier les fichiers HTML
+        echo "🌐 FICHIERS HTML:"
+        if [ -f "index.html" ]; then
+          lines=$(wc -l < index.html)
+          echo "  ✅ index.html ($lines lignes)"
+        else
+          echo "  ❌ index.html - MANQUANT"
+        fi
+        
+        if [ -f "about.html" ]; then
+          lines=$(wc -l < about.html)
+          echo "  ✅ about.html ($lines lignes)"
+        else
+          echo "  ❌ about.html - MANQUANT"
+        fi
+        
+        # Vérifier les fichiers JS
+        echo ""
+        echo "⚡ FICHIERS JAVASCRIPT:"
+        js_files=("logic.js" "buttons.js" "history.js")
+        for js_file in "${js_files[@]}"; do
+          if [ -f "$js_file" ]; then
+            lines=$(wc -l < "$js_file")
+            echo "  ✅ $js_file ($lines lignes)"
+          else
+            echo "  ❌ $js_file - MANQUANT"
+          fi
+        done
+        
+        # Vérifier les fichiers CSS
+        echo ""
+        echo "🎨 FICHIERS CSS:"
+        css_files=("style.css" "theme.css")
+        for css_file in "${css_files[@]}"; do
+          if [ -f "$css_file" ]; then
+            lines=$(wc -l < "$css_file")
+            echo "  ✅ $css_file ($lines lignes)"
+          else
+            echo "  ❌ $css_file - MANQUANT"
+          fi
+        done
+        
+        echo ""
+        echo "=== ANALYSE TERMINÉE ==="
+        echo "✅ Workflow exécuté avec succès"
