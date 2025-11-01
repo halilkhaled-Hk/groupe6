@@ -41,7 +41,7 @@ body {
 }
 
 .btn:hover {
-    background: #ddd;
+    background: #c31616;
 }
 
 .equal {
@@ -68,6 +68,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    
 }
 
     
@@ -83,4 +84,135 @@ body {
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(255, 149, 0, 0.6);
 }
-    
+
+/* === VERSION MYRIAM : BANNIÈRE VIOLETTE === */
+.version-banner {
+    background: linear-gradient(135deg, #9333ea, #c084fc);
+    color: white;
+    font-size: 0.85em;
+    font-weight: bold;
+    text-align: center;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin: 8px auto 0;
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(147, 51, 234, 0.3);
+    letter-spacing: 0.5px;
+}
+
+/* === BOUTONS VIOLETS RECTANGULAIRES === */
+.violet-btn {
+    display: inline-block;
+    background: #9333ea;
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 3px 6px rgba(147, 51, 234, 0.3);
+    transition: all 0.2s ease;
+    border: 2px solid #9333ea;
+}
+
+.violet-btn:hover {
+    background: #7c2ad1;
+    border-color: #7c2ad1;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(147, 51, 234, 0.4);
+}
+
+/* Ajustement du conteneur titre */
+.title-container {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.title-container h1,
+.title-container h2 {
+    margin: 0 0 5px 0;
+    color: #222;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .header {
+        flex-direction: column;
+        gap: 12px;
+    }
+    #theme-toggle {
+        position: static;
+        transform: none;
+        width: 100%;
+    }
+    .violet-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* === BANNIÈRE VIOLETTE "Version Myriam" === */
+.version-banner {
+    background: linear-gradient(135deg, #9333ea, #c084fc);
+    color: white;
+    font-size: 0.85em;
+    font-weight: bold;
+    text-align: center;
+    padding: 6px 14px;
+    border-radius: 6px;
+    margin: 8px auto 0;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(147, 51, 234, 0.3);
+    letter-spacing: 0.6px;
+}
+
+/* === BOUTONS VIOLETS RECTANGULAIRES === */
+.violet-btn {
+    display: inline-block;
+    background: #9333ea;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 3px 6px rgba(147, 51, 234, 0.3);
+    transition: all 0.2s ease;
+    border: 2px solid #9333ea;
+    text-align: center;
+}
+
+.violet-btn:hover {
+    background: #7c2ad1;
+    border-color: #7c2ad1;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(147, 51, 234, 0.4);
+}
+
+/* === AJUSTEMENT TITRE === */
+.title-container {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.title-container h1,
+.title-container h2 {
+    margin: 0 0 5px 0;
+    color: #222;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 500px) {
+    .header {
+        flex-direction: column;
+        gap: 12px;
+    }
+    #theme-toggle {
+        position: static;
+        transform: none;
+        width: 100%;
+    }
+    .violet-btn {
+        width: 100%;
+    }
+}
