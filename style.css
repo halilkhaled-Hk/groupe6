@@ -41,12 +41,15 @@ body {
 }
 
 .btn:hover {
-    background: #c31616;
+    background: #0ce056;
+
 }
+
 
 .equal {
     background: #0a84ff;
     color: white;
+    grid-column: span 2;
 }
 
 .zero {
