@@ -67,3 +67,42 @@ jobs:
         echo ""
         echo "=== ANALYSE TERMINÉE ==="
         echo "✅ Workflow exécuté avec succès"
+
+  send-email:
+    runs-on: ubuntu-latest
+    name: Send Success Email
+    needs: analyze-code
+    if: success()
+    
+    steps:
+    - name: 📧 Send Success Notification
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 587
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "✅ Commit Réussi - Analyse IA Terminée"
+        to: ${{ secrets.NOTIFICATION_EMAIL }}
+        from: "GitHub Actions Bot"
+        body: |
+          🎉 ANALYSE IA TERMINÉE AVEC SUCCÈS !
+          
+          Dépôt: ${{ github.repository }}
+          Commit: ${{ github.sha }}
+          Branche: ${{ github.ref }}
+          Auteur: ${{ github.actor }}
+          Date: ${{ github.event.head_commit.timestamp }}
+          
+          L'analyse de la structure du projet a été exécutée avec succès.
+          Tous les fichiers ont été vérifiés et le code est opérationnel.
+          
+          📊 Résumé de l'analyse:
+          - Structure du projet validée
+          - Fichiers HTML, CSS et JS analysés
+          - Workflow GitHub Actions complété
+          
+          Consultez les détails sur: https://github.com/${{ github.repository }}/actions
+          
+          Cordialement,
+          Votre IA d'Analyse de Code 🤖
