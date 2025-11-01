@@ -11,98 +11,180 @@ jobs:
     - name: 📥 Checkout code
       uses: actions/checkout@v3
       
-    - name: 🔍 Analyze Files
+    - name: 🔍 Advanced Code Analysis
+      id: analysis
       run: |
-        echo "🤖 DÉMARRAGE ANALYSE IA"
+        echo "🤖 DÉMARRAGE ANALYSE IA AVANCÉE"
         echo "Dépôt: $GITHUB_REPOSITORY"
         echo "Commit: $GITHUB_SHA"
+        echo "Branche: $GITHUB_REF"
         echo ""
-        echo "=== STRUCTURE DU PROJET ==="
-        ls -la
-        echo ""
-        echo "=== FICHIERS TROUVÉS ==="
         
-        # Vérifier les fichiers HTML
-        echo "🌐 FICHIERS HTML:"
+        # Initialiser les variables pour le rapport
+        HTML_STATUS=""
+        JS_STATUS=""
+        CSS_STATUS=""
+        ERRORS_FOUND=0
+        WARNINGS=0
+        ANALYSIS_REPORT=""
+        
+        echo "=== STRUCTURE DU PROJET ==="
+        PROJECT_STRUCTURE=$(ls -la)
+        echo "$PROJECT_STRUCTURE"
+        
+        echo ""
+        echo "=== ANALYSE DÉTAILLÉE DES FICHIERS ==="
+        
+        # Analyse des fichiers HTML
+        echo "🌐 ANALYSE HTML:"
+        HTML_REPORT=""
         if [ -f "index.html" ]; then
-          lines=$(wc -l < index.html)
-          echo "  ✅ index.html ($lines lignes)"
+          LINES=$(wc -l < index.html)
+          SIZE=$(wc -c < index.html)
+          if [ $LINES -lt 10 ]; then
+            HTML_REPORT="$HTML_REPORT❌ index.html: TROP COURT ($LINES lignes)\n"
+            ((ERRORS_FOUND++))
+          else
+            HTML_REPORT="$HTML_REPORT✅ index.html: $LINES lignes, ${SIZE} octets\n"
+          fi
         else
-          echo "  ❌ index.html - MANQUANT"
+          HTML_REPORT="$HTML_REPORT❌ index.html: MANQUANT\n"
+          ((ERRORS_FOUND++))
         fi
         
         if [ -f "about.html" ]; then
-          lines=$(wc -l < about.html)
-          echo "  ✅ about.html ($lines lignes)"
+          LINES=$(wc -l < about.html)
+          SIZE=$(wc -c < about.html)
+          HTML_REPORT="$HTML_REPORT✅ about.html: $LINES lignes, ${SIZE} octets\n"
         else
-          echo "  ❌ about.html - MANQUANT"
+          HTML_REPORT="$HTML_REPORT⚠️ about.html: NON TROUVÉ\n"
+          ((WARNINGS++))
         fi
         
-        # Vérifier les fichiers JS
+        # Analyse des fichiers JavaScript
         echo ""
-        echo "⚡ FICHIERS JAVASCRIPT:"
-        js_files=("logic.js" "buttons.js" "history.js")
-        for js_file in "${js_files[@]}"; do
-          if [ -f "$js_file" ]; then
-            lines=$(wc -l < "$js_file")
-            echo "  ✅ $js_file ($lines lignes)"
+        echo "⚡ ANALYSE JAVASCRIPT:"
+        JS_REPORT=""
+        JS_FILES=("logic.js" "buttons.js" "history.js")
+        for JS_FILE in "${JS_FILES[@]}"; do
+          if [ -f "$JS_FILE" ]; then
+            LINES=$(wc -l < "$JS_FILE")
+            SIZE=$(wc -c < "$JS_FILE")
+            if [ $LINES -eq 0 ]; then
+              JS_REPORT="$JS_REPORT❌ $JS_FILE: FICHIER VIDE\n"
+              ((ERRORS_FOUND++))
+            elif [ $LINES -lt 5 ]; then
+              JS_REPORT="$JS_REPORT⚠️ $JS_FILE: TRÈS COURT ($LINES lignes)\n"
+              ((WARNINGS++))
+            else
+              JS_REPORT="$JS_REPORT✅ $JS_FILE: $LINES lignes, ${SIZE} octets\n"
+            fi
           else
-            echo "  ❌ $js_file - MANQUANT"
+            JS_REPORT="$JS_REPORT❌ $JS_FILE: MANQUANT\n"
+            ((ERRORS_FOUND++))
           fi
         done
         
-        # Vérifier les fichiers CSS
+        # Analyse des fichiers CSS
         echo ""
-        echo "🎨 FICHIERS CSS:"
-        css_files=("style.css" "theme.css")
-        for css_file in "${css_files[@]}"; do
-          if [ -f "$css_file" ]; then
-            lines=$(wc -l < "$css_file")
-            echo "  ✅ $css_file ($lines lignes)"
+        echo "🎨 ANALYSE CSS:"
+        CSS_REPORT=""
+        CSS_FILES=("style.css" "theme.css")
+        for CSS_FILE in "${CSS_FILES[@]}"; do
+          if [ -f "$CSS_FILE" ]; then
+            LINES=$(wc -l < "$CSS_FILE")
+            SIZE=$(wc -c < "$CSS_FILE")
+            if [ $LINES -eq 0 ]; then
+              CSS_REPORT="$CSS_REPORT❌ $CSS_FILE: FICHIER VIDE\n"
+              ((ERRORS_FOUND++))
+            else
+              CSS_REPORT="$CSS_REPORT✅ $CSS_FILE: $LINES lignes, ${SIZE} octets\n"
+            fi
           else
-            echo "  ❌ $css_file - MANQUANT"
+            CSS_REPORT="$CSS_REPORT⚠️ $CSS_FILE: NON TROUVÉ\n"
+            ((WARNINGS++))
           fi
         done
         
+        # Vérification des dépendances
         echo ""
-        echo "=== ANALYSE TERMINÉE ==="
-        echo "✅ Workflow exécuté avec succès"
+        echo "📦 ANALYSE DES DÉPENDANCES:"
+        DEPS_REPORT=""
+        if [ -f "package.json" ]; then
+          DEPS_REPORT="$DEPS_REPORT✅ package.json: PRÉSENT\n"
+          if [ -f "package-lock.json" ]; then
+            DEPS_REPORT="$DEPS_REPORT✅ package-lock.json: PRÉSENT\n"
+          else
+            DEPS_REPORT="$DEPS_REPORT⚠️ package-lock.json: MANQUANT\n"
+            ((WARNINGS++))
+          fi
+        else
+          DEPS_REPORT="$DEPS_REPORT❌ package.json: MANQUANT\n"
+          ((ERRORS_FOUND++))
+        fi
+        
+        # Génération du rapport final
+        ANALYSIS_REPORT="=== RAPPORT D'ANALYSE COMPLET ===\n\n"
+        ANALYSIS_REPORT+="📊 STATISTIQUES:\n"
+        ANALYSIS_REPORT+="• Erreurs critiques: $ERRORS_FOUND\n"
+        ANALYSIS_REPORT+="• Avertissements: $WARNINGS\n"
+        ANALYSIS_REPORT+="• Statut: $([ $ERRORS_FOUND -eq 0 ] && echo "✅ SUCCÈS" || echo "❌ ÉCHEC")\n\n"
+        
+        ANALYSIS_REPORT+="🌐 RAPPORT HTML:\n$HTML_REPORT\n"
+        ANALYSIS_REPORT+="⚡ RAPPORT JAVASCRIPT:\n$JS_REPORT\n"
+        ANALYSIS_REPORT+="🎨 RAPPORT CSS:\n$CSS_REPORT\n"
+        ANALYSIS_REPORT+="📦 RAPPORT DÉPENDANCES:\n$DEPS_REPORT\n"
+        
+        ANALYSIS_REPORT+="=== ANALYSE TERMINÉE ===\n"
+        
+        # Sauvegarder le rapport pour l'étape suivante
+        echo "ANALYSIS_REPORT<<EOF" >> $GITHUB_OUTPUT
+        echo -e "$ANALYSIS_REPORT" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+        
+        echo "ERRORS_FOUND=$ERRORS_FOUND" >> $GITHUB_OUTPUT
+        echo "WARNINGS=$WARNINGS" >> $GITHUB_OUTPUT
+        
+        # Afficher le rapport dans les logs
+        echo -e "$ANALYSIS_REPORT"
 
-  send-email:
+  send-report:
     runs-on: ubuntu-latest
-    name: Send Success Email
+    name: Send Analysis Report
     needs: analyze-code
-    if: success()
     
     steps:
-    - name: 📧 Send Success Notification
+    - name: 📧 Send Detailed Report
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.gmail.com
         server_port: 587
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
-        subject: "✅ Commit Réussi - Analyse IA Terminée"
+        subject: "📊 Rapport d'Analyse IA - Commit ${{ github.sha }}"
         to: ${{ secrets.NOTIFICATION_EMAIL }}
-        from: "GitHub Actions Bot"
+        from: "GitHub AI Analyzer"
         body: |
-          🎉 ANALYSE IA TERMINÉE AVEC SUCCÈS !
+          🤖 RAPPORT D'ANALYSE IA - ${{ github.repository }}
           
-          Dépôt: ${{ github.repository }}
-          Commit: ${{ github.sha }}
-          Branche: ${{ github.ref }}
-          Auteur: ${{ github.actor }}
-          Date: ${{ github.event.head_commit.timestamp }}
+          📋 INFORMATIONS DU COMMIT:
+          • Dépôt: ${{ github.repository }}
+          • Commit: ${{ github.sha }}
+          • Branche: ${{ github.ref }}
+          • Auteur: ${{ github.actor }}
+          • Date: ${{ github.event.head_commit.timestamp }}
+          • Lien: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
           
-          L'analyse de la structure du projet a été exécutée avec succès.
-          Tous les fichiers ont été vérifiés et le code est opérationnel.
+          ${{ needs.analyze-code.outputs.ANALYSIS_REPORT }}
           
-          📊 Résumé de l'analyse:
-          - Structure du projet validée
-          - Fichiers HTML, CSS et JS analysés
-          - Workflow GitHub Actions complété
+          📈 RÉSUMÉ EXÉCUTIF:
+          ${{ needs.analyze-code.outputs.ERRORS_FOUND }} erreur(s) critique(s) détectée(s)
+          ${{ needs.analyze-code.outputs.WARNINGS }} avertissement(s)
           
-          Consultez les détails sur: https://github.com/${{ github.repository }}/actions
+          ${{ fromJSON('{0: \"✅ CODE VALIDE - Prêt pour la production\", 1: \"⚠️ PROBLÈMES MINEURS - Vérification recommandée\", 2: \"❌ PROBLÈMES CRITIQUES - Action requise\"}[needs.analyze-code.outputs.ERRORS_FOUND] || \"🔧 ANALYSE TERMINÉE\") }}
+          
+          Consultez les détails complets sur: 
+          https://github.com/${{ github.repository }}/actions
           
           Cordialement,
           Votre IA d'Analyse de Code 🤖
