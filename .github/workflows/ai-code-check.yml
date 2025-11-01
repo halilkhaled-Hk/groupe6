@@ -128,7 +128,12 @@ jobs:
         ANALYSIS_REPORT+="📊 STATISTIQUES:\n"
         ANALYSIS_REPORT+="• Erreurs critiques: $ERRORS_FOUND\n"
         ANALYSIS_REPORT+="• Avertissements: $WARNINGS\n"
-        ANALYSIS_REPORT+="• Statut: $([ $ERRORS_FOUND -eq 0 ] && echo "✅ SUCCÈS" || echo "❌ ÉCHEC")\n\n"
+        
+        if [ $ERRORS_FOUND -eq 0 ]; then
+          ANALYSIS_REPORT+="• Statut: ✅ SUCCÈS\n\n"
+        else
+          ANALYSIS_REPORT+="• Statut: ❌ ÉCHEC\n\n"
+        fi
         
         ANALYSIS_REPORT+="🌐 RAPPORT HTML:\n$HTML_REPORT\n"
         ANALYSIS_REPORT+="⚡ RAPPORT JAVASCRIPT:\n$JS_REPORT\n"
@@ -181,7 +186,13 @@ jobs:
           ${{ needs.analyze-code.outputs.ERRORS_FOUND }} erreur(s) critique(s) détectée(s)
           ${{ needs.analyze-code.outputs.WARNINGS }} avertissement(s)
           
-          ${{ fromJSON('{0: \"✅ CODE VALIDE - Prêt pour la production\", 1: \"⚠️ PROBLÈMES MINEURS - Vérification recommandée\", 2: \"❌ PROBLÈMES CRITIQUES - Action requise\"}[needs.analyze-code.outputs.ERRORS_FOUND] || \"🔧 ANALYSE TERMINÉE\") }}
+          {% if needs.analyze-code.outputs.ERRORS_FOUND == 0 %}
+          ✅ CODE VALIDE - Prêt pour la production
+          {% elif needs.analyze-code.outputs.ERRORS_FOUND == 1 %}
+          ⚠️ PROBLÈMES MINEURS - Vérification recommandée
+          {% else %}
+          ❌ PROBLÈMES CRITIQUES - Action requise
+          {% endif %}
           
           Consultez les détails complets sur: 
           https://github.com/${{ github.repository }}/actions
