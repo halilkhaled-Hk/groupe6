@@ -69,3 +69,18 @@ body {
     cursor: pointer;
     width: 100%;
 }
+
+    
+
+.equal {
+    background: #732d91;
+    color: white;
+    transition: all 0.2s;
+}
+
+.equal:hover {
+    background: #732d91;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 149, 0, 0.6);
+}
+    
