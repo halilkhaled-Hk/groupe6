@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "v0-restaurant-application-design",
   "version": "1.0.0",
@@ -52,3 +53,6 @@
     "typescript": "^5"
   }
 }
+=======
+{ "name": "calculatrice-groupe6", "version": "1.0.0", "scripts": { "lint": "node ai-code-checker.js" }, "devDependencies": { "nodemailer": "^6.9.0" } } 
+>>>>>>> 16762db3f57ca2e03e796caedb3310fa81669a4c
