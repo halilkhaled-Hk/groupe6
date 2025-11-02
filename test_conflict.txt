@@ -1,1 +1,104 @@
+Pour résoudre proprement ce conflit, il est crucial de comprendre ce que chaque version représente et de décider quelle est la **version correcte** à conserver. Le conflit se présente comme suit :
+
+```
+<<<<<<< HEAD
 Version initiale
+=======
+Version de l'équipe
+>>>>>>> main
+```
+
+*   `<<<<<<< HEAD` à `=======` : C'est la version de votre branche actuelle (celle sur laquelle vous êtes ou celle que vous avez "rebase" ou "merged from"). Ici, c'est "Version initiale".
+*   `=======` à `>>>>>>> main` : C'est la version de la branche `main` (celle que vous essayez de fusionner ou de rebaser). Ici, c'est "Version de l'équipe".
+
+**Le choix de la "version correcte" dépend entièrement du contexte de votre projet et de la logique métier.** Sans plus d'informations, je ne peux pas choisir arbitrairement.
+
+Cependant, je vais vous montrer comment résoudre le conflit en gardant uniquement l'une ou l'autre, ou en combinant si nécessaire, car c'est ainsi que vous "gardez uniquement le code correct".
+
+---
+
+### Étapes pour résoudre le conflit :
+
+1.  **Ouvrez le fichier** contenant le conflit dans votre éditeur de texte.
+
+2.  **Décidez quelle version est correcte** (ou si une combinaison est nécessaire).
+
+    *   **Scénario 1 : La "Version initiale" est le code correct.**
+        Vous décidez que le contenu de `HEAD` est ce qui doit rester.
+        Vous modifiez le fichier pour qu'il ne contienne que cela, en supprimant tous les marqueurs de conflit.
+
+        **Contenu du fichier après résolution :**
+        ```
+        Version initiale
+        ```
+
+    *   **Scénario 2 : La "Version de l'équipe" est le code correct.**
+        Vous décidez que le contenu de la branche `main` est ce qui doit rester.
+        Vous modifiez le fichier pour qu'il ne contienne que cela, en supprimant tous les marqueurs de conflit.
+
+        **Contenu du fichier après résolution :**
+        ```
+        Version de l'équipe
+        ```
+
+    *   **Scénario 3 : Une combinaison est le code correct (rare pour cet exemple simple, mais possible).**
+        Vous décidez que les deux informations sont pertinentes et doivent coexister. Vous les arrangez comme il faut et supprimez les marqueurs.
+
+        **Contenu du fichier après résolution (exemple de combinaison) :**
+        ```
+        Version initiale - mis à jour par l'équipe
+        ```
+        *(ou simplement laisser les deux sur des lignes séparées si c'est pertinent)*
+        ```
+        Version initiale
+        Version de l'équipe
+        ```
+
+3.  **Enregistrez les modifications** dans le fichier.
+
+4.  **Marquez le conflit comme résolu** pour Git :
+
+    ```bash
+    git add <nom_du_fichier_en_conflit>
+    ```
+    (Remplacez `<nom_du_fichier_en_conflit>` par le chemin réel du fichier, par exemple `mon_fichier.txt`).
+
+5.  **Finalisez la fusion/le rebase** en créant un commit :
+
+    ```bash
+    git commit -m "Résolution de conflit : conservé la version correcte du code"
+    ```
+    (Git vous proposera un message de commit par défaut que vous pouvez modifier.)
+
+---
+
+### Exemple pratique (en supposant que "Version de l'équipe" est le code correct) :
+
+1.  **Situation initiale du fichier :**
+
+    ```
+    <<<<<<< HEAD
+    Version initiale
+    =======
+    Version de l'équipe
+    >>>>>>> main
+    ```
+
+2.  **Modification du fichier pour garder "Version de l'équipe" :**
+    Vous supprimez les lignes `<<<<<<< HEAD`, `Version initiale`, `=======` et `>>>>>>> main`.
+
+    **Le fichier ressemblera à ceci :**
+    ```
+    Version de l'équipe
+    ```
+
+3.  **Enregistrez le fichier.**
+
+4.  **Depuis votre terminal :**
+
+    ```bash
+    git add <chemin/vers/votre/fichier.txt>
+    git commit -m "Corr: Résolution de conflit dans <fichier.txt>, conservé la version de l'équipe."
+    ```
+
+Et voilà, le conflit est résolu proprement en gardant uniquement la version que vous avez jugée correcte.
