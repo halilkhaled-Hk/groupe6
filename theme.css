@@ -9,6 +9,7 @@ body.dark .calculator {
 body.dark .display {
     background: #000;
     color: rgb(242, 8, 195);
+    color: rgb(244, 46, 230);
 }
 
 body.dark .btn {
