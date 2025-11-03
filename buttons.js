@@ -20,7 +20,7 @@ buttons.forEach(symbol => {
 
 // Ajout d'un bouton pour changer de thème
 const themeBtn = document.createElement("button");
-themeBtn.textContent = "🌙";
+themeBtn.textContent = "🌙"
 themeBtn.className = "theme-toggle";
 themeBtn.addEventListener("click", () => {
   document.body.classList.toggle("dark");
