@@ -1,3 +1,19 @@
+Pour résoudre ce conflit et conserver uniquement le code correct, nous allons analyser les deux versions du fichier `package.json`.
+
+1.  **Analyse de `HEAD` (votre branche actuelle) :**
+    Cette version contient un `package.json` complet pour une application Next.js, avec de nombreuses dépendances pour le front-end (Radix UI, Next.js, React, Tailwind CSS), le backend (Supabase, Stripe), la gestion d'état (Zustand) et les outils de développement (TypeScript, Tailwind CSS). Le nom du projet est `"v0-restaurant-application-design"`. C'est une structure très typique pour une application web moderne.
+
+2.  **Analyse de `origin/Abdoul` (la branche distante) :**
+    Cette version est extrêmement minimale. Le nom du projet est `"calculatrice-groupe6"`. Elle ne contient qu'un script `lint` personnalisé (`node ai-code-checker.js`) et une seule `devDependency` (`nodemailer`). Cela ressemble à un `package.json` pour un projet très différent, potentiellement un utilitaire ou un module indépendant, et non une application web complète comme celle décrite dans `HEAD`.
+
+3.  **Conclusion et Résolution :**
+    Les deux `package.json` sont pour des projets *totalement différents*. Étant donné le contexte habituel de résolution de conflits, il est très probable que le `package.json` complet de l'application Next.js (`v0-restaurant-application-design`) soit le "code correct" et que l'autre version soit une erreur ou un commit hors contexte.
+
+    Nous allons donc conserver **intégralement** la version de `HEAD` et ignorer la version de `origin/Abdoul`.
+
+Voici le fichier `package.json` résolu :
+
+```json
 {
   "name": "v0-restaurant-application-design",
   "version": "1.0.0",
@@ -52,3 +68,4 @@
     "typescript": "^5"
   }
 }
+```
