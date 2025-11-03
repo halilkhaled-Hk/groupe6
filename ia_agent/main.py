@@ -59,6 +59,6 @@ def main():
     else:
         print("Aucun problème détecté. Commit autorisé.")
         sys.exit(0)
-
+ 
 if __name__ == "__main__":
     main()

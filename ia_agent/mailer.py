@@ -9,14 +9,25 @@ load_dotenv()
 GMAIL_USER = os.getenv("GMAIL_USER") 
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
 
+def format_personalized_message(errors: List[str], recipient: str) -> str:
+    username = recipient.split("@")[0].capitalize()
+    intro = f"Bonjour {username},\n\n"
+    body = "Nous avons détecté les erreurs suivantes dans ton dernier commit :\n\n"
+    error_list = "\n".join(f"- {err}" for err in errors)
+    conclusion = (
+        "\n\nMerci de corriger ces points avant de pousser à nouveau.\n"
+        "L'équipe IA de sécurité automatisée."
+    )
+    return intro + body + error_list + conclusion
+
 def send_error_report(errors: List[str], recipient: str):
     if not GMAIL_USER or not GMAIL_APP_PASSWORD:
         print("Identifiants Gmail manquants. Vérifie ton fichier .env.")
         return
 
     msg = EmailMessage()
-    msg.set_content("\n".join(errors))
-    msg['Subject'] = 'Erreur dans le commit'
+    msg.set_content(format_personalized_message(errors, recipient))
+    msg['Subject'] = 'Erreurs détectées dans ton commit'
     msg['From'] = GMAIL_USER
     msg['To'] = recipient
 
@@ -31,8 +42,9 @@ def send_error_report(errors: List[str], recipient: str):
 # Exemple d'utilisation (à commenter ou supprimer en production)
 if __name__ == "__main__":
     erreurs = [
-        "Erreur : fichier .env présent dans le commit",
-        "Erreur : token GitHub détecté dans main.py"
+        "Fichier `.env` suivi par Git",
+        "Token GitHub détecté dans `main.py`",
+        "Mot de passe en dur trouvé dans `config.py`"
     ]
-    destinataire = "tonadresse@gmail.com"
+    destinataire = "mvogoboris123@gmail.com"
     send_error_report(erreurs, destinataire)
