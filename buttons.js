@@ -9,6 +9,10 @@ const buttons = [
 
 const buttonsContainer = document.getElementById("buttons");
 const display = document.getElementById("display");
+<<<<<<< HEAD
+<<<<<<< HEAD
+const buttons = document.querySelectorAll(".btn");
+=======
 
 buttons.forEach(symbol => {
   const btn = document.createElement("button");
@@ -17,6 +21,7 @@ buttons.forEach(symbol => {
   btn.addEventListener("click", () => handleButton(symbol));
   buttonsContainer.appendChild(btn);
 });
+>>>>>>> origin/Halil
 
 // Ajout d'un bouton pour changer de thème
 const themeBtn = document.createElement("button");
@@ -26,6 +31,17 @@ themeBtn.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   themeBtn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
 });
+<<<<<<< HEAD
+=======
+
+document.querySelectorAll(".btn").forEach(button => {
+    button.addEventListener("click", () => {
+        const action = button.dataset.action;
+        handleButton(action);
+    });
+});
+>>>>>>> origin/Abdoul
+=======
 document.querySelector(".controls").appendChild(themeBtn);
 
 
@@ -55,3 +71,4 @@ if (display) {
 } else {
     console.error("Élément #display introuvable dans le DOM.");
 }
+>>>>>>> origin/Halil

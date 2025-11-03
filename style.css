@@ -1,4 +1,10 @@
+Pour résoudre ce conflit Git proprement, nous allons examiner chaque bloc de conflit et choisir la version la plus complète et la plus moderne, en combinant les ajouts pertinents de chaque branche.
+
+Voici la résolution, ligne par ligne, avec les explications des choix :
+
+```css
 body {
+    /* Choix: Version de HEAD/Halil pour un arrière-plan dégradé et une police moderne. `margin: 0;` est essentiel. */
     background: linear-gradient(135deg, #dfe9f3, #ffffff);
     font-family: 'Segoe UI', Arial, sans-serif;
     display: flex;
@@ -10,6 +16,7 @@ body {
 
 .calculator {
     background: #fff;
+    /* Choix: Version de HEAD/Halil. Plus de détails, `border-radius` plus grand, ombre plus prononcée, transitions et hover effect. */
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     padding: 20px;
@@ -21,11 +28,13 @@ body {
 }
 
 .calculator:hover {
+    /* Choix: De HEAD/Halil, car Abdoul n'avait pas cette règle. */
     transform: scale(1.02);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .display {
+    /* Choix: Version de HEAD/Halil. Couleur plus foncée, padding et border-radius plus grands, `box-sizing`. */
     background: #1a1a1a;
     color: #0f0;
     font-size: 2em;
@@ -41,10 +50,12 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+    /* Choix: `width: 100%;` de HEAD/Halil. */
     width: 100%;
 }
 
 .btn {
+    /* Choix: Version de HEAD/Halil pour `background` légèrement différent, `border-radius` plus grand et les `transition` pour les interactions. */
     background: #f5f5f5;
     border: none;
     padding: 15px;
@@ -55,15 +66,32 @@ body {
 }
 
 .btn:hover {
+    /* Choix: `background: #0ce056;` de Brayand/Halil est plus distinctif qu'un gris subtil. `transform: scale(0.98);` de HEAD (Jude). */
     background: #0ce056;
+    transform: scale(0.98);
+}
 
+.btn.active {
+    /* Choix: Nouvelle classe `.btn.active` de HEAD (Jude), une bonne addition pour l'état actif. */
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(0.95);
+    transition: transform 0.1s, background-color 0.1s;
 }
 
 
 .equal {
-    background: #0a84ff;
+    /* Choix: La version violette de Jude/Brayand/Halil est plus élaborée avec `transition`. */
+    background: #732d91;
     color: white;
     grid-column: span 2;
+    transition: all 0.2s;
+}
+
+.equal:hover {
+    /* Choix: De Jude/Brayand/Halil, avec effets de transformation et d'ombre. */
+    background: #732d91; /* Garde la même couleur pour le hover que le normal, ce qui est une option de design */
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 149, 0, 0.6);
 }
 
 .zero {
@@ -71,6 +99,7 @@ body {
 }
 
 #history {
+    /* Choix: Version détaillée de Jude/Halil, avec plus de styles comme `border-top`, `padding-top`, `width`, `text-align` et une hauteur plus grande. */
     margin-top: 15px;
     font-size: 0.9em;
     color: #333;
@@ -84,6 +113,7 @@ body {
 
 #theme-toggle,
 #about-btn {
+    /* Choix: La version plus générale et détaillée de Jude/Halil. */
     margin-top: 10px;
     padding: 10px;
     border: none;
@@ -94,99 +124,29 @@ body {
     transition: background 0.3s ease, transform 0.1s ease;
 }
 
-#theme-toggle {
-
-    margin-top: 10px;
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    
-}
-
-    
-
-.equal {
-    background: #732d91;
+#about-btn {
+    /* Choix: Styles spécifiques à `#about-btn` pour sa couleur de fond et de texte. */
+    background: #0078d7;
     color: white;
-    transition: all 0.2s;
 }
 
-.equal:hover {
-    background: #732d91;
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(255, 149, 0, 0.6);
+#theme-toggle:hover {
+    /* Choix: De Jude/Halil, pour des effets de hover spécifiques. */
+    background: #333;
+    transform: scale(0.98);
 }
 
+#about-btn:hover {
+    /* Choix: De Jude/Halil, pour des effets de hover spécifiques. */
+    background: #005ea6;
+    transform: scale(0.98);
+}
+
+/* --- Nouvelles sections communes à Jude et Halil --- */
+/* Pour ces sections, nous allons choisir la version légèrement plus raffinée de Halil ou une des deux si elles sont identiques. */
 
 .version-banner {
-    background: linear-gradient(135deg, #9333ea, #c084fc);
-    color: white;
-    font-size: 0.85em;
-    font-weight: bold;
-    text-align: center;
-    padding: 6px 12px;
-    border-radius: 6px;
-    margin: 8px auto 0;
-    display: inline-block;
-    box-shadow: 0 2px 4px rgba(147, 51, 234, 0.3);
-    letter-spacing: 0.5px;
-}
-
-
-.violet-btn {
-    display: inline-block;
-    background: #9333ea;
-    color: white !important;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 1em;
-    font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0 3px 6px rgba(147, 51, 234, 0.3);
-    transition: all 0.2s ease;
-    border: 2px solid #9333ea;
-}
-
-.violet-btn:hover {
-    background: #7c2ad1;
-    border-color: #7c2ad1;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(147, 51, 234, 0.4);
-}
-
-
-.title-container {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.title-container h1,
-.title-container h2 {
-    margin: 0 0 5px 0;
-    color: #222;
-}
-
-
-@media (max-width: 500px) {
-    .header {
-        flex-direction: column;
-        gap: 12px;
-    }
-    #theme-toggle {
-        position: static;
-        transform: none;
-        width: 100%;
-    }
-    .violet-btn {
-        width: 100%;
-        text-align: center;
-    }
-}
-
-
-.version-banner {
+    /* Choix: Version de Halil, avec un `padding` légèrement plus grand, `box-shadow` et `letter-spacing` affinés. */
     background: linear-gradient(135deg, #9333ea, #c084fc);
     color: white;
     font-size: 0.85em;
@@ -200,8 +160,8 @@ body {
     letter-spacing: 0.6px;
 }
 
-
 .violet-btn {
+    /* Choix: Version de Halil, car elle retire `!important` et ajoute `text-align: center`. */
     display: inline-block;
     background: #9333ea;
     color: white;
@@ -217,26 +177,29 @@ body {
 }
 
 .violet-btn:hover {
+    /* Identique dans les deux branches, on en garde une. */
     background: #7c2ad1;
     border-color: #7c2ad1;
     transform: translateY(-2px);
     box-shadow: 0 5px 10px rgba(147, 51, 234, 0.4);
 }
 
-
 .title-container {
+    /* Identique dans les deux branches, on en garde une. */
     text-align: center;
     margin-bottom: 15px;
 }
 
 .title-container h1,
 .title-container h2 {
+    /* Identique dans les deux branches, on en garde une. */
     margin: 0 0 5px 0;
     color: #222;
 }
 
 /* === RESPONSIVE === */
 @media (max-width: 500px) {
+    /* Identique dans les deux branches, on en garde une. */
     .header {
         flex-direction: column;
         gap: 12px;
@@ -248,22 +211,7 @@ body {
     }
     .violet-btn {
         width: 100%;
+        /* `text-align: center;` est déjà dans la définition principale du bouton. */
     }
 }
-
-
-#theme-toggle:hover {
-    background: #333;
-    transform: scale(0.98);
-}
-
-#about-btn {
-    background: #0078d7;
-    color: white;
-}
-
-#about-btn:hover {
-    background: #005ea6;
-    transform: scale(0.98);
-}
-
+```

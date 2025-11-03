@@ -8,7 +8,19 @@ body.dark .calculator {
 
 body.dark .display {
     background: #000;
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    color: rgb(244, 46, 230);
+=======
+    color: #0f0;
+>>>>>>> origin/Abdoul
+=======
     color: rgb(242, 8, 195);
+>>>>>>> origin/Brayand
+=======
+    color: rgb(242, 8, 195);
+>>>>>>> origin/Halil
 }
 
 body.dark .btn {
