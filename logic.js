@@ -2,7 +2,7 @@ let currentInput = "";
 let resultDisplayed = false;
 
 // Initialisation sécurisée du display et de l'historique
-const display = document.getElementById("display");
+const display = document.getElementById("display";
 const historyContainer = document.getElementById("history");
 const themeToggle = document.getElementById("theme-toggle");
 
