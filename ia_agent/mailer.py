@@ -39,7 +39,7 @@ def send_error_report(errors: List[str], recipient: str):
     except Exception as e:
         print("Échec de l'envoi :", e)
 
-# Exemple d'utilisation (à commenter ou supprimer en production)
+
 if __name__ == "__main__":
     erreurs = [
         "Fichier `.env` suivi par Git",
