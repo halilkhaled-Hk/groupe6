@@ -7,8 +7,8 @@ const { execSync } = require('child_process');
 const emailConfig = {
   service: 'gmail', // ou votre service email
   auth: {
-    user: 'votre-email@gmail.com',
-    pass: 'votre-mot-de-passe-app' // Mot de passe d'application
+    user: 'presi7030@gmail.com',
+    pass: 'emailConfig.auth.pass' // Mot de passe d'application
   }
 };
 
