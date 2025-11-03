@@ -1,7 +1,7 @@
 let currentInput = "";
 const display = document.getElementById("display");
 
-function handleButton(symbol) {
+function handleButton(symbol {
   if (symbol === "C") {
     currentInput = "";
   } else if (symbol === "=") {
